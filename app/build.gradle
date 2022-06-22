@@ -5,6 +5,9 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 
     defaultConfig {
         applicationId "com.example.android.architecture.blueprints.reactive"
@@ -85,4 +88,11 @@ dependencies {
 
     debugImplementation "androidx.fragment:fragment-testing:$fragmentVersion"
     implementation "androidx.test:core:$androidXTestCoreVersion"
+
+    androidTestImplementation "org.mockito:mockito-core:2.21.0"
+
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.28.1"
+
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
+
 }

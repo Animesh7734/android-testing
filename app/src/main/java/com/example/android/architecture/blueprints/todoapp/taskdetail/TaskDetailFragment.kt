@@ -28,8 +28,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.architecture.blueprints.todoapp.EventObserver
 import com.example.android.architecture.blueprints.todoapp.R
+import com.example.android.architecture.blueprints.todoapp.TodoApplication
 import com.example.android.architecture.blueprints.todoapp.databinding.TaskdetailFragBinding
 import com.example.android.architecture.blueprints.todoapp.tasks.DELETE_RESULT_OK
+import com.example.android.architecture.blueprints.todoapp.tasks.TasksViewModelFactory
 import com.example.android.architecture.blueprints.todoapp.util.setupRefreshLayout
 import com.example.android.architecture.blueprints.todoapp.util.setupSnackbar
 import com.google.android.material.snackbar.Snackbar
@@ -38,11 +40,16 @@ import com.google.android.material.snackbar.Snackbar
  * Main UI for the task detail screen.
  */
 class TaskDetailFragment : Fragment() {
+
     private lateinit var viewDataBinding: TaskdetailFragBinding
 
     private val args: TaskDetailFragmentArgs by navArgs()
 
-    private val viewModel by viewModels<TaskDetailViewModel>()
+    //private val viewModel by viewModels<TaskDetailViewModel>()
+
+    private val viewModel by viewModels<TaskDetailViewModel> {
+        TaskDetailViewModelFactory((requireContext().applicationContext as TodoApplication).taskRepository)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupFab()
